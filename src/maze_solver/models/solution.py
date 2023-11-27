@@ -1,5 +1,8 @@
+# parent to data classes that are expected by only contain and modify their own data
 from dataclasses import dataclass
+# to iterate over iterable and reduce to single element
 from functools import reduce
+# type hinting iterator
 from typing import Iterator
 
 from src.maze_solver.models.role import Role

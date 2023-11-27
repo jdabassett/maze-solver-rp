@@ -1,6 +1,10 @@
+# to create temporary files that will not be saved
 import tempfile
+# to remove whitespace before multiline text
 import textwrap
+# to open browser and display results
 import webbrowser
+# parent to data classes that are expected by only contain and modify their own data
 from dataclasses import dataclass
 
 from src.maze_solver.models.maze import Maze

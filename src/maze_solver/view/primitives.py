@@ -1,4 +1,6 @@
+# parent to data classes that are expected by only contain and modify their own data
 from dataclasses import dataclass
+# parents for classes
 from typing import NamedTuple, Protocol
 
 

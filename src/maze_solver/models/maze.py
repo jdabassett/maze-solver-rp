@@ -1,5 +1,8 @@
+# parent to data classes that are expected by only contain and modify their own data
 from dataclasses import dataclass
+# to cache method results to avoid recalculations when recalled
 from functools import cached_property
+# type hints for iterator
 from typing import Iterator
 
 from src.maze_solver.models.role import Role

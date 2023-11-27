@@ -1,3 +1,4 @@
+# to create integer enumeration constants
 from enum import IntEnum, auto
 
 

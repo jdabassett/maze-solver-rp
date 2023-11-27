@@ -1,3 +1,4 @@
+# to create integer and binary compatible enumeration constants
 from enum import IntFlag, auto
 
 
