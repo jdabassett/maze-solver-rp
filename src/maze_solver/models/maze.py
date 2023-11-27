@@ -125,10 +125,10 @@ def validate_exit(maze: Maze) -> None:
 
 
 # run the following in shell to test proper functionality
-# from maze_solver.models.border import Border
-# from maze_solver.models.maze import Maze
-# from maze_solver.models.role import Role
-# from maze_solver.models.square import Square
+# from src.maze_solver.models.border import Border
+# from src.maze_solver.models.maze import Maze
+# from src.maze_solver.models.role import Role
+# from src.maze_solver.models.square import Square
 #
 #
 # maze = Maze(

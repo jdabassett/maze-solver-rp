@@ -24,6 +24,7 @@ ROLE_EMOJI = {
     Role.REWARD: "\N{white medium star}",
 }
 
+
 # frozen dataclasses are immutable
 @dataclass(frozen=True)
 class SVG:
@@ -293,12 +294,12 @@ def label(emoji: str, top_left: Point, offset: int) -> str:
 
 # run the following in shell to test functionality
 # from pathlib import Path
-# from maze_solver.models.border import Border
-# from maze_solver.models.maze import Maze
-# from maze_solver.models.role import Role
-# from maze_solver.models.solution import Solution
-# from maze_solver.models.square import Square
-# from maze_solver.view.renderer import SVGRenderer
+# from src.maze_solver.models.border import Border
+# from src.maze_solver.models.maze import Maze
+# from src.maze_solver.models.role import Role
+# from src.maze_solver.models.solution import Solution
+# from src.maze_solver.models.square import Square
+# from src.maze_solver.view.renderer import SVGRenderer
 #
 # maze = Maze(
 #     squares=(

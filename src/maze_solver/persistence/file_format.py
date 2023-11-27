@@ -22,7 +22,7 @@ class FileHeader:
     def read(cls, file: BinaryIO) -> "FileHeader":
         """
         Input file name to read header of binary maze file
-        Creates and returns instance of class from file header values
+        Creates and returns instance of FileHeader from file header values
         :param file:
         :return:
         """
@@ -62,11 +62,14 @@ class FileBody:
     @classmethod
     def read(cls, header: FileHeader, file: BinaryIO) -> "FileBody":
         """
-
+        Input file header and filename
+        Will read body data
+        Create and return new instance of FileBody
         :param header:
         :param file:
         :return:
         """
+        # create class instance from data within binary maze file body
         return cls(array.array("B", file.read(header.width * header.height)))
 
     def write(self, file: BinaryIO) -> None:
