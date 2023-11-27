@@ -2,8 +2,8 @@ from dataclasses import dataclass
 from functools import reduce
 from typing import Iterator
 
-from role import Role
-from square import Square
+from src.maze_solver.models.role import Role
+from src.maze_solver.models.square import Square
 
 
 @dataclass(frozen=True)

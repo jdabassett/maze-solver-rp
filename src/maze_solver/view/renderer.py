@@ -3,12 +3,12 @@ import textwrap
 import webbrowser
 from dataclasses import dataclass
 
-from maze_solver.models.maze import Maze
-from maze_solver.models.role import Role
-from maze_solver.models.solution import Solution
-from maze_solver.models.square import Square
-from maze_solver.view.decomposer import decompose
-from maze_solver.view.primitives import Point, Polyline, Rect, Text, tag
+from src.maze_solver.models.maze import Maze
+from src.maze_solver.models.role import Role
+from src.maze_solver.models.solution import Solution
+from src.maze_solver.models.square import Square
+from src.maze_solver.view.decomposer import decompose
+from src.maze_solver.view.primitives import Point, Polyline, Rect, Text, tag
 
 # generate dictionary to store strings of emoji characters as values
 # use enum constants as keys

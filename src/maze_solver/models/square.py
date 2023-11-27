@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
-from border import Border
-from role import Role
+from src.maze_solver.models.border import Border
+from src.maze_solver.models.role import Role
 
 
 @dataclass(frozen=True)
