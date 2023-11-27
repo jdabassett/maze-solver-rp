@@ -113,9 +113,18 @@ class DisjointLines(tuple[Line, ...]):
 
 @dataclass
 class Rect:
+    """
+    Dataclass to create rectangular objects
+    """
     top_left: Point | None = None
 
     def draw(self, **attributes) -> str:
+        """
+        Input self and dictionary of attributes
+        Returns xml element of rectangle
+        :param attributes:
+        :return: xml as string
+        """
         if self.top_left:
             attrs = attributes | {"x": self.top_left.x, "y": self.top_left.y}
         else:
@@ -125,10 +134,19 @@ class Rect:
 
 @dataclass(frozen=True)
 class Text:
+    """
+    Immutable dataclass to create text elements of squares
+    """
     content: str
     point: Point
 
     def draw(self, **attributes) -> str:
+        """
+        Input self and dictionary of attributes
+        Returns xml element for text inside square
+        :param attributes:
+        :return: xml as string
+        """
         return tag(
             "text", self.content, x=self.point.x, y=self.point.y, **attributes
         )
