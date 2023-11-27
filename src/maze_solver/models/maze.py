@@ -29,7 +29,7 @@ class Maze:
     def __iter__(self) -> Iterator[Square]:
         """
         Transform maze into an iterable
-        :return: Iterator
+        :return: iterator
         """
         return iter(self.squares)
 
