@@ -79,7 +79,7 @@ class Maze:
 
 def validate_indices(maze: Maze) -> None:
     """
-    Raises assertion if any square index from maze is not valid or in proper order
+    Raises exception if any square index from maze is not valid or in proper order
     :param maze:
     :return: None
     """
@@ -90,7 +90,7 @@ def validate_indices(maze: Maze) -> None:
 
 def validate_rows_columns(maze: Maze) -> None:
     """
-    Raises assertion if any square row or column values from maze are not valid or in proper oder
+    Raises exception if any square row or column values from maze are not valid or in proper oder
     :param maze:
     :return: None
     """
@@ -103,7 +103,7 @@ def validate_rows_columns(maze: Maze) -> None:
 
 def validate_entrance(maze: Maze) -> None:
     """
-    Raises assertion if maze doesn't have exactly one entrance
+    Raises exception if maze doesn't have exactly one entrance
     :param maze:
     :return: None
     """
@@ -114,7 +114,7 @@ def validate_entrance(maze: Maze) -> None:
 
 def validate_exit(maze: Maze) -> None:
     """
-    Raises assertion if maze doesn't have exactly one exit
+    Raises exception if maze doesn't have exactly one exit
     :param maze:
     :return: None
     """

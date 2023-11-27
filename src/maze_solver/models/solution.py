@@ -22,9 +22,9 @@ class Solution:
         Post initialization tests to verify that solution could be a valid one
         :return: None
         """
-        # raise assertion if first square doesn't have role of entrance
+        # raise exception if first square doesn't have role of entrance
         assert self.squares[0].role is Role.ENTRANCE
-        # raise assertion if last square doesn't have role of exit
+        # raise exception if last square doesn't have role of exit
         assert self.squares[-1].role is Role.EXIT
         # check that all adjacent squares either share a row or column value
         reduce(validate_corridor, self.squares)
@@ -55,7 +55,7 @@ class Solution:
 def validate_corridor(current: Square, following: Square) -> Square:
     """
     Check that all adjacent squares either share a row or column value
-    Will raise assertion if ever false
+    Will raise exception if ever false
     :param current:
     :param following:
     :return: Square
