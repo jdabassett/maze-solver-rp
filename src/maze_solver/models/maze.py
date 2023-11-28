@@ -4,9 +4,14 @@ from dataclasses import dataclass
 from functools import cached_property
 # type hints for iterator
 from typing import Iterator
+from pathlib import Path
 
 from src.maze_solver.models.role import Role
 from src.maze_solver.models.square import Square
+from src.maze_solver.persistence.serializer import (
+    dump_squares,
+    load_squares,
+)
 
 
 @dataclass(frozen=True)
@@ -15,6 +20,25 @@ class Maze:
     Immutable dataclass representing maze as tuple of squares
     """
     squares: tuple[Square, ...]
+
+    @classmethod
+    def load(cls, path: Path) -> "Maze":
+        """
+        Input file path
+        Output is a maze instance with data from binary maze file
+        :param path:
+        :return: Maze
+        """
+        return Maze(tuple(load_squares(path)))
+
+    def dump(self, path: Path) -> None:
+        """
+        Input file path
+        Writes maze self into binary maze file at file path
+        :param path:
+        :return:
+        """
+        dump_squares(self.width, self.height, self.squares, path)
 
     def __post_init__(self) -> None:
         """
@@ -147,3 +171,22 @@ def validate_exit(maze: Maze) -> None:
 #          Square(11, 2, 3, Border.BOTTOM | Border.RIGHT),
 #      )
 #  )
+
+
+# here is another test
+# from pathlib import Path
+# from src.maze_solver.models.maze import Maze
+# maze = Maze.load(Path("miniature.maze"))
+# maze.width, maze.height
+# len(maze.squares)
+# maze.entrance
+# maze.exit
+
+
+# a more complex one
+# from pathlib import Path
+# from src.maze_solver.models.maze import Maze
+# from src.maze_solver.view.renderer import SVGRenderer
+# maze = Maze.load(Path("mazes") / "labyrinth.maze")
+# len(maze.squares), maze.height, maze.width
+# SVGRenderer().render(maze).preview()

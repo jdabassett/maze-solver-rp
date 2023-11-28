@@ -39,9 +39,12 @@ def load_squares(path: pathlib.Path) -> Iterator[Square]:
     :return:
     """
     with path.open("rb") as file:
+        # extract header from file
         header = FileHeader.read(file)
+        # if not valid header format version, raise exception
         if header.format_version != FORMAT_VERSION:
             raise ValueError("Unsupported file format version")
+        # extract body from rest of file, remember pointer is currently pointing after header
         body = FileBody.read(header, file)
         return deserialize(header, body)
 
@@ -64,13 +67,16 @@ def serialize(
 
 def deserialize(header: FileHeader, body: FileBody) -> Iterator[Square]:
     """
-
+    Input header and body instances from imported file
+    Output is iterator generator
     :param header:
     :param body:
-    :return:
+    :return: Iterator
     """
     for index, square_value in enumerate(body.square_values):
+        # create row and column values from index value
         row, column = divmod(index, header.width)
+        # extract border and role instances from binary value of square
         border, role = decompress(square_value)
         yield Square(index, row, column, border, role)
 
@@ -81,7 +87,7 @@ def compress(square: Square) -> int:
     :param square:
     :return:
     """
-    # shift role to the left and base-mask with border value to preserve both in new binary value
+    # shift role to the left and bitmask with border value to preserve both in new binary value
     return (square.role << 4) | square.border.value
 
 
@@ -103,7 +109,7 @@ def decompress(square_value: int) -> tuple[Border, Role]:
 # from src.maze_solver.models.maze import Maze
 # from src.maze_solver.models.role import Role
 # from src.maze_solver.models.square import Square
-# from src.maze_solver.persistence.serializer import dump_squares
+# from src.maze_solver.persistence.serializer import dump_squares, load_squares
 #
 # maze = Maze(
 #     squares=(
@@ -122,4 +128,8 @@ def decompress(square_value: int) -> tuple[Border, Role]:
 #     )
 # )
 #
-# dump_squares(maze.width, maze.height, maze.squares, Path("miniature.maze"))
+# path = Path("miniature.maze")
+#
+# dump_squares(maze.width, maze.height, maze.squares, path)
+# load_squares(path) == maze
+# load_squares(path) is maze
