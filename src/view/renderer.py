@@ -124,7 +124,7 @@ class SVGRenderer:
         return "".join(
             [
                 # create arrow points to exit
-                arrow_marker(),
+                # arrow_marker(),
                 # create background
                 background(),
                 # create maze xml elements and unpack list of strings
@@ -207,31 +207,31 @@ class SVGRenderer:
         ).translate(x=self.offset + extra_offset, y=self.offset + extra_offset)
 
 
-def arrow_marker() -> str:
-    """
-    Will return an arrow xml element to render over exit
-    :return:
-    """
-    return tag(
-        "defs",
-        tag(
-            "marker",
-            tag(
-                "path",
-                d="M 0,0 L 10,5 L 0,10 2,5 z",
-                fill="red",
-                fill_opacity="50%",
-            ),
-            id="arrow",
-            viewBox="0 0 20 20",
-            refX="2",
-            refY="5",
-            markerUnits="strokeWidth",
-            markerWidth="10",
-            markerHeight="10",
-            orient="auto",
-        ),
-    )
+# def arrow_marker() -> str:
+#     """
+#     Will return an arrow xml element to render over exit
+#     :return:
+#     """
+#     return tag(
+#         "defs",
+#         tag(
+#             "marker",
+#             tag(
+#                 "path",
+#                 d="M 0,0 L 10,5 L 0,10 2,5 z",
+#                 fill="red",
+#                 fill_opacity="50%",
+#             ),
+#             id="arrow",
+#             viewBox="0 0 20 20",
+#             refX="2",
+#             refY="5",
+#             markerUnits="strokeWidth",
+#             markerWidth="10",
+#             markerHeight="10",
+#             orient="auto",
+#         ),
+#     )
 
 
 def background() -> str:

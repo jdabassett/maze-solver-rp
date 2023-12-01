@@ -7,7 +7,7 @@ from src.models.maze import Maze
 def string_to_maze(maze_api) -> Maze:
     """
     Input string maze from mazelib.
-    Output formated maze.
+    Output formatted maze.
     :param maze_api: string
     :return: Maze
     """

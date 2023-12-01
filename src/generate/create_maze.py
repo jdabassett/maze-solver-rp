@@ -68,6 +68,5 @@ def create_api(select, dim_row, dim_col):
 
 if __name__ == "__main__":
     from src.view.renderer import SVGRenderer
-    maze = create_maze(100, 25, 25)
+    maze = create_maze(6, 25, 25)
     SVGRenderer(30, 6).render(maze=maze).preview()
-    

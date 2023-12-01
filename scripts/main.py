@@ -5,7 +5,7 @@ import json
 from src.graphs.solver import solve_all
 from src.models.maze import Maze
 from src.view.renderer import SVGRenderer
-from src.generate.create import create_maze
+from src.generate.create_maze import create_maze
 
 
 def load_messages() -> dict:
