@@ -5,8 +5,8 @@ from functools import reduce
 # type hinting iterator
 from typing import Iterator
 
-from src.maze_solver.models.role import Role
-from src.maze_solver.models.square import Square
+from src.models.role import Role
+from src.models.square import Square
 
 
 @dataclass(frozen=True)

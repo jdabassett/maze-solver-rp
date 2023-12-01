@@ -8,8 +8,8 @@ class Border(IntFlag):
     """
     EMPTY = 0
     TOP = auto()
-    BOTTOM = auto()
     LEFT = auto()
+    BOTTOM = auto()
     RIGHT = auto()
 
     @property
@@ -40,3 +40,23 @@ class Border(IntFlag):
         :return: boolean
         """
         return self.bit_count() < 2
+
+    def __getitem__(self, input):
+        """
+        input string
+        returns class attribute
+        :param input:
+        :return:
+        """
+        if input == "EMPTY":
+            return Border.EMPTY
+        elif input == "TOP":
+            return Border.TOP
+        elif input == "LEFT":
+            return Border.LEFT
+        elif input == "BOTTOM":
+            return Border.BOTTOM
+        elif input == "RIGHT":
+            return Border.RIGHT
+        else:
+            raise ValueError("Invalid input for Border subscription.")

@@ -2,10 +2,10 @@ import array
 import pathlib
 from typing import Iterator
 
-from src.maze_solver.models.border import Border
-from src.maze_solver.models.role import Role
-from src.maze_solver.models.square import Square
-from src.maze_solver.persistence.file_format import FileBody, FileHeader
+from src.models.border import Border
+from src.models.role import Role
+from src.models.square import Square
+from src.persistence.file_format import FileBody, FileHeader
 
 FORMAT_VERSION: int = 1
 

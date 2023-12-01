@@ -1,2 +1,4 @@
+Cython==0.29.32
+mazelib==0.9.14
 networkx==3.2.1
-
+numpy==1.23.4

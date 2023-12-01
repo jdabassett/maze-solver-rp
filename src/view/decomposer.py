@@ -1,5 +1,5 @@
-from src.maze_solver.models.border import Border
-from src.maze_solver.view.primitives import (
+from src.models.border import Border
+from src.view.primitives import (
     DisjointLines,
     Line,
     NullPrimitive,

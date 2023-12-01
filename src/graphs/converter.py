@@ -3,10 +3,10 @@ from typing import NamedTuple, TypeAlias
 
 import networkx as nx
 
-from src.maze_solver.models.border import Border
-from src.maze_solver.models.maze import Maze
-from src.maze_solver.models.role import Role
-from src.maze_solver.models.square import Square
+from src.models.border import Border
+from src.models.maze import Maze
+from src.models.role import Role
+from src.models.square import Square
 
 Node: TypeAlias = Square
 
@@ -95,6 +95,7 @@ def get_directed_edges(maze: Maze, nodes: set[Node]) -> set[Edge]:
     :param nodes:
     :return: set[Edge]
     """
+    # set combine forward and reverse edges
     return (edges := get_edges(maze, nodes)) | {edge.flip for edge in edges}
 
 

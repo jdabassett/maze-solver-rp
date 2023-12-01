@@ -7,12 +7,12 @@ import webbrowser
 # parent to data classes that are expected by only contain and modify their own data
 from dataclasses import dataclass
 
-from src.maze_solver.models.maze import Maze
-from src.maze_solver.models.role import Role
-from src.maze_solver.models.solution import Solution
-from src.maze_solver.models.square import Square
-from src.maze_solver.view.decomposer import decompose
-from src.maze_solver.view.primitives import Point, Polyline, Rect, Text, tag
+from src.models.maze import Maze
+from src.models.role import Role
+from src.models.solution import Solution
+from src.models.square import Square
+from src.view.decomposer import decompose
+from src.view.primitives import Point, Polyline, Rect, Text, tag
 
 # generate dictionary to store strings of emoji characters as values
 # use enum constants as keys
@@ -78,7 +78,7 @@ class SVGRenderer:
     line_width: int = 6
 
     @property
-    def offset(self):
+    def offset(self) -> int:
         """
         To accommodate left side cutoff.
         Offset will shift maze to right.

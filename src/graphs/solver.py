@@ -1,8 +1,8 @@
 import networkx as nx
 
-from src.maze_solver.graphs.converter import make_graph
-from src.maze_solver.models.maze import Maze
-from src.maze_solver.models.solution import Solution
+from src.graphs.converter import make_graph
+from src.models.maze import Maze
+from src.models.solution import Solution
 
 
 def solve(maze: Maze) -> Solution | None:

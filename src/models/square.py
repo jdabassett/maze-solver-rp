@@ -1,8 +1,8 @@
 # parent to data classes that are expected by only contain and modify their own data
 from dataclasses import dataclass
 
-from src.maze_solver.models.border import Border
-from src.maze_solver.models.role import Role
+from src.models.border import Border
+from src.models.role import Role
 
 
 @dataclass(frozen=True)
