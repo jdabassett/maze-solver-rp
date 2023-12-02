@@ -1,3 +1,55 @@
 {
-  "intro": "Hello welcome to A-MAZE-ING the command-line application that generates and solves mazes for you!",
+  "intro": {
+    "name": "intro",
+    "message": "Hello! Welcome to A-MAZE-ING!\nWe make the mazes and solve them so you don't have too! ;)",
+    "prompts": [],
+    "value": ""
+  },
+  "main": {
+    "name": "main",
+    "message": "What would you like to do?",
+    "prompts": [
+      "create_maze",
+      "solve_maze",
+      "continuing",
+      "quitting"
+    ],
+    "value": ""
+  },
+  "continuing": {
+    "name": "continuing",
+    "message": "Show options again.",
+    "prompts": [],
+    "value": ""
+  },
+  "quitting": {
+    "name": "quitting",
+    "message": "Quit.",
+    "prompts": [],
+    "value": ""
+  },
+  "create_maze": {
+    "name": "create_maze",
+    "message": "Create a maze!",
+    "prompts": [
+      "continuing",
+      "quitting"
+    ],
+    "value": "create_maze"
+  },
+  "solve_maze": {
+    "name": "solve_maze",
+    "message": "Solve a maze!",
+    "prompts": [
+      "continuing",
+      "quitting"
+    ],
+    "value": "solve_maze"
+  },
+  "good-bye": {
+    "name": "good-bye",
+    "message": "The application is closing now.\nThank you for playing building and solving mazes with us!\nSee you soon. :)",
+    "prompts": [],
+    "value": ""
+  }
 }

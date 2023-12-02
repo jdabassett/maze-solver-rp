@@ -3,7 +3,7 @@ from mazelib.generate import Prims, HuntAndKill, AldousBroder, BacktrackingGener
 from mazelib.solve.BacktrackingSolver import BacktrackingSolver
 
 from src.models.maze import Maze
-from convert_api_maze import string_to_maze
+from src.generate.convert_api_maze import string_to_maze
 
 
 def create_maze(select, dim_row, dim_col) -> Maze:
@@ -68,5 +68,5 @@ def create_api(select, dim_row, dim_col):
 
 if __name__ == "__main__":
     from src.view.renderer import SVGRenderer
-    maze = create_maze(6, 25, 25)
+    maze = create_maze(6, 10, 10)
     SVGRenderer(30, 6).render(maze=maze).preview()

@@ -32,6 +32,30 @@ def dump_squares(
         body.write(file)
 
 
+def serialize(
+    width: int, height: int, squares: tuple[Square, ...]
+) -> tuple[FileHeader, FileBody]:
+    """
+    Creates instances of FileHeader and FileBody from maze width, height, and squares
+    Returns each
+    :param width:
+    :param height:
+    :param squares:
+    :return:
+    """
+    header = FileHeader(FORMAT_VERSION, width, height)
+    body = FileBody(array.array("B", map(compress, squares)))
+    return header, body
+
+def compress(square: Square) -> int:
+    """
+    Compress the role and border values into integer that will become one binary
+    :param square:
+    :return:
+    """
+    # shift role to the left and bitmask with border value to preserve both in new binary value
+    return (square.role << 4) | square.border.value
+
 def load_squares(path: pathlib.Path) -> Iterator[Square]:
     """
 
@@ -49,22 +73,6 @@ def load_squares(path: pathlib.Path) -> Iterator[Square]:
         return deserialize(header, body)
 
 
-def serialize(
-    width: int, height: int, squares: tuple[Square, ...]
-) -> tuple[FileHeader, FileBody]:
-    """
-    Creates instances of FileHeader and FileBody from maze width, height, and squares
-    Returns each
-    :param width:
-    :param height:
-    :param squares:
-    :return:
-    """
-    header = FileHeader(FORMAT_VERSION, width, height)
-    body = FileBody(array.array("B", map(compress, squares)))
-    return header, body
-
-
 def deserialize(header: FileHeader, body: FileBody) -> Iterator[Square]:
     """
     Input header and body instances from imported file
@@ -79,17 +87,6 @@ def deserialize(header: FileHeader, body: FileBody) -> Iterator[Square]:
         # extract border and role instances from binary value of square
         border, role = decompress(square_value)
         yield Square(index, row, column, border, role)
-
-
-def compress(square: Square) -> int:
-    """
-    Compress the role and border values into integer that will become one binary
-    :param square:
-    :return:
-    """
-    # shift role to the left and bitmask with border value to preserve both in new binary value
-    return (square.role << 4) | square.border.value
-
 
 def decompress(square_value: int) -> tuple[Border, Role]:
     """
