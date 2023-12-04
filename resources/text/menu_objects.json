@@ -201,7 +201,7 @@
     "parameters": {}
   },
   "load_maze": {
-    "level": "load_Maze",
+    "level": "load_maze",
     "mixin": "LoadMazeMixin",
     "message_pitch": "Upload a Maze",
     "message_prompt": "What file would you like to upload?",

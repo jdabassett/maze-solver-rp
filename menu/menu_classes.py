@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 import importlib
 import os
+from pathlib import Path
 from rich.console import Console
 from rich.prompt import Prompt
 from src.models.maze import Maze
@@ -50,10 +51,17 @@ class Menu:
         level_next.solution = solution
         return level_next
 
+    def status_update(self):
+        level_str = self.level.replace("_"," ").title()
+        maze_exists = "\n[√]maze" if self.maze is not None else ""
+        solution_exists = "\n[√]solution" if self.maze is not None else ""
+        console.print(f"\nLocation: {level_str}{maze_exists}{solution_exists}", style="green")
+
 
 class CreateMazeMixin:
     def action(self):
         try:
+            self.status_update()
             # if a maze already exists
             if self.maze is not None:
                 self.what_to_do_with_current_maze("save_maze")
@@ -93,7 +101,7 @@ class CreateMazeMixin:
             svg = SVGRenderer().render(maze)
             svg.preview()
             console.print("Check your browser for a preview!", style="green")
-            return self.transfer_maze_and_or_solution(self.children.get("save_file"), maze, None)
+            return self.transfer_maze_and_or_solution(self.children.get("main"), maze, None)
         except Exception as error:
             console.print("Something went wrong, please look under the hood and try again.", style="red")
             console.print(f"{error}", style="red")
@@ -103,30 +111,29 @@ class CreateMazeMixin:
 class LoadMazeMixin:
     def action(self):
         try:
+            self.status_update()
             # if maze already exists
             if self.maze is not None:
                 self.what_to_do_with_current_maze("save_maze")
 
             console.print(self.message_prompt, style="bold green")
-            root_dir = os.getcwd()
-            maze_dir = os.path.join(root_dir,"resources","mazes")
-            maze_files = os.listdir(maze_dir)
-            maze_list = [file for file in maze_files if file.endswith(".maze")]
-            maze_sorted = sorted(maze_list)
-            maze_sorted.append("Cancel")
+            root_dir = Path.cwd()
+            maze_dir = root_dir.joinpath("resources","mazes")
+            maze_paths = sorted([item for item in maze_dir.iterdir() if item.is_file() and item.suffix == ".maze"])
+            maze_paths.append(root_dir.joinpath("Cancel"))
             options = []
-            for index, filename in enumerate(maze_sorted):
+            for index, path in enumerate(maze_paths):
                 index += 1
                 options.append(str(index))
-                console.print(f"[{index}] {filename}",style="white")
+                console.print(f"[{index}] {str(path.name)}",style="white")
             input_index = int(Prompt.ask("Choose by number", choices=options, show_choices=False))-1
-            input_filename = maze_sorted[input_index]
-            maze_file = os.path.join(maze_dir, input_filename)
-            if maze_file == "Cancel":
+            input_path = maze_paths[input_index]
+            if str(input_path.name) == "Cancel":
                 console.print("Leaving Load Maze.", style="green")
                 return self.transfer_maze_and_or_solution(self.children.get(self.previous_level), self.maze, self.solution)
-            # TODO: load file save to maze and solution
-            return self.transfer_maze_and_or_solution(self.children.get(self.previous_level), self.maze, self.solution)
+            print(str(input_path))
+            maze = Maze.load(input_path) | self.maze
+            return self.transfer_maze_and_or_solution(self.children.get(self.previous_level), maze, self.solution)
 
         except Exception as error:
             console.print("Something went wrong, please look under the hood and try again.", style="red")
@@ -135,26 +142,36 @@ class LoadMazeMixin:
 
 class SolveMazeMixin:
     def action(self):
-        pass
+        self.status_update()
+        return self.transfer_maze_and_or_solution(self.children.get(self.previous_level), self.maze, self.solution)
 
 class SaveMazeMixin:
     def action(self):
-        pass
+        self.status_update()
+        return self.transfer_maze_and_or_solution(self.children.get(self.previous_level), self.maze, self.solution)
 
 class TransitMixin:
     def action(self):
-        console.print(self.message_prompt, style="bold green")
-        options_dict = {}
-        for index, choice in enumerate([i for i in self.children.values()]):
-            index += 1
-            options_dict[str(index)] =choice
-            console.print(f"[{index}] {choice}", style="white")
-        options_keys = [i for i in options_dict.keys()]
-        input_str = Prompt.ask("Choose by number", choices=options_keys, show_choices=False)
+        try:
+            self.status_update()
+            console.print(self.message_prompt, style="bold green")
+            options_dict = {}
+            for index, choice in enumerate([i for i in self.children.values()]):
+                index += 1
+                options_dict[str(index)] =choice
+                console.print(f"[{index}] {choice}", style="white")
+            options_keys = [i for i in options_dict.keys()]
+            input_str = Prompt.ask("Choose by number", choices=options_keys, show_choices=False)
 
-        return self.transfer_maze_and_or_solution(options_dict.get(input_str), self.maze, self.solution)
+            return self.transfer_maze_and_or_solution(options_dict.get(input_str), self.maze, self.solution)
+        except Exception as error:
+            console.print("Something went wrong, please look under the hood and try again.", style="red")
+            console.print(f"{error}", style="red")
+            return self.transfer_maze_and_or_solution(self.children.get(self.previous_level), self.maze, self.solution)
+
 
 class QuittingMixin:
     def action(self):
-        #allow user to return, save current maze, or leave
-        pass
+        # TODO: allow user to return, save current maze, or leave
+        self.status_update()
+        return self.transfer_maze_and_or_solution(self.children.get(self.previous_level), self.maze, self.solution)
