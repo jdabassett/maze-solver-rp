@@ -17,16 +17,13 @@ console = Console()
 def main() -> None:
     level = import_data("resources/text/menu_objects.json")
     console.print(level.message_prompt, style="bold green")
-    level = level.children[0]
+    level = next(level)
 
     while True:
         sleep(2)
-        if level.actionable:
-            level = level.action()
-        else:
-            level = level.transit()
+        level = level.action()
         if level.level == "quitting":
-            level = level.children[-1]
+            level = next(level)
             break
     sleep(2)
     console.print(level, style="bold magenta")

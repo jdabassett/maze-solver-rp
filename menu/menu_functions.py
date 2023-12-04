@@ -6,7 +6,7 @@ import argparse
 from src.graphs.solver import solve_all
 from src.models.maze import Maze
 from src.view.renderer import SVGRenderer
-from menu.menu_classes import Menu
+from menu.menu_classes import Menu, TransitMixin, SolveMazeMixin, CreateMazeMixin
 
 sleep_in_seconds = 0.2
 
@@ -29,14 +29,20 @@ def import_data(relative_path) -> Menu:
 def create_menu_objects(dict_import: dict) -> Menu:
     dict_menu = {}
     for key,value in dict_import.items():
-        value["actionable"] = value.get('actionable')=="True"
-        dict_menu[key] = Menu(**value)
+        if value.get("mixin") == "TransitMixin":
+            menu_new = type("MenuTransit", (Menu, TransitMixin), {})
+            dict_menu[key] = menu_new(**value)
+        elif value.get("mixin") == "CreateMazeMixin":
+            menu_new = type("CreateMazeMenu", (Menu, CreateMazeMixin), {})
+            dict_menu[key] = menu_new(**value)
+        elif value.get("mixin") == "SolveMazeMixin":
+            menu_new = type("CreateMazeMenu", (Menu, SolveMazeMixin), {})
+            dict_menu[key] = menu_new(**value)
 
     for menu in dict_menu.values():
-        list_children = []
-        for child in menu.children:
-            retrieve_menu = dict_menu.get(child)
-            list_children.append(retrieve_menu)
+        list_children = {}
+        for name, child in menu.children.items():
+            list_children[name] = dict_menu.get(name)
         menu.children = list_children
 
     return dict_menu.get("intro")
