@@ -70,6 +70,9 @@ class CreateMazeMixin:
 class SolveMazeMixin:
     pass
 
+class SaveFileMixin:
+    pass
+
 @dataclass
 class Menu:
     """"""

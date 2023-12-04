@@ -66,10 +66,6 @@ def parse_path() -> pathlib.Path:
     return parser.parse_args().path
 
 
-if __name__=="__main__":
-    intro = load_intro()
-    # print(type(intro.actionable))
-    # print(intro.actionable)
-#     main = intro.children[0]
-#     create_maze = main.children[0]
-#     print(create_maze)
+# if __name__=="__main__":
+#     intro = load_intro()
+

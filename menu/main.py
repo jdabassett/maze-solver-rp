@@ -1,14 +1,5 @@
-import argparse
-import pathlib
 from rich.console import Console
-from rich.prompt import Prompt
-
-from src.graphs.solver import solve_all
-from src.models.maze import Maze
-from src.view.renderer import SVGRenderer
-from menu.menu_classes import Menu
-from menu.menu_functions import sleep, import_data, solve_maze
-from src.generate.create_maze import create_maze
+from menu.menu_functions import sleep, import_data
 
 # global
 console = Console()
