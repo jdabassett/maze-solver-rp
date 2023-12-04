@@ -6,7 +6,7 @@ console = Console()
 
 
 def main() -> None:
-    level = import_data("resources/text/menu_objects.json")
+    level = import_data()
     console.print(level.message_prompt, style="bold green")
     level = next(level)
 

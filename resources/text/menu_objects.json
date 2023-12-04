@@ -22,7 +22,9 @@
     "message_prompt": "What would you like to do?",
     "children": {
       "create_maze": "",
+      "load_maze": "",
       "solve_maze": "",
+      "save_maze": "",
       "quitting": ""
     },
     "value": {
@@ -35,15 +37,16 @@
   },
   "quitting": {
     "level": "quitting",
-    "mixin": "TransitMixin",
+    "mixin": "QuittingMixin",
     "message_pitch": "Leave A-maze-ing",
     "message_prompt": "None",
     "children": {
       "main": "",
-      "good-bye": ""
+      "save_maze": "",
+      "good_bye": ""
     },
     "previous_level": "main",
-    "next_level": "good-bye",
+    "next_level": "good_bye",
     "value": {
       "module": "",
       "callable": ""
@@ -163,8 +166,8 @@
     },
     "parameters": {}
   },
-  "good-bye": {
-    "level": "good-bye",
+  "good_bye": {
+    "level": "good_bye",
     "mixin": "TransitMixin",
     "message_pitch": "The application is closing now.\nThank you for playing building and solving mazes with us!\nSee you soon. :)",
     "message_prompt": "None",
@@ -179,16 +182,36 @@
     },
     "parameters": {}
   },
-    "save-file": {
-    "level": "save-file",
-    "mixin": "TransitMixin",
-    "message_pitch": "....save file",
-    "message_prompt": "...save file...",
+  "save_maze": {
+    "level": "save_maze",
+    "mixin": "SaveMazeMixin",
+    "message_pitch": "Save a Maze",
+    "message_prompt": "Input a file name for the maze.",
     "children": {
-      "create-maze": ""
+      "main": "",
+      "create_maze": "",
+      "quitting": ""
     },
-    "previous_level": "create-maze",
-    "next_level": "create-maze",
+    "previous_level": "create_maze",
+    "next_level": "create_maze",
+    "value": {
+      "module": "",
+      "callable": ""
+    },
+    "parameters": {}
+  },
+  "load_maze": {
+    "level": "load_Maze",
+    "mixin": "LoadMazeMixin",
+    "message_pitch": "Upload a Maze",
+    "message_prompt": "What file would you like to upload?",
+    "children": {
+      "main": "",
+      "create_maze": "",
+      "quitting": ""
+    },
+    "previous_level": "main",
+    "next_level": "main",
     "value": {
       "module": "",
       "callable": ""
