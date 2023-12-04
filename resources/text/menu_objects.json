@@ -1,0 +1,87 @@
+{
+  "intro": {
+    "level": "intro",
+    "actionable": "False",
+    "message_pitch": "Introduction",
+    "message_prompt": "Hello! Welcome to A-MAZE-ING!\nWe make the mazes and solve them so you don't have too! ;)",
+    "children": [
+      "main"
+    ],
+    "parameters": {}
+  },
+  "main": {
+    "level": "main",
+    "actionable": "False",
+    "message_pitch": "Main",
+    "message_prompt": "What would you like to do?",
+    "children": [
+      "create_maze",
+      "solve_maze",
+      "intro",
+      "quitting"
+    ],
+    "parameters": {}
+  },
+  "quitting": {
+    "level": "quitting",
+    "actionable": "False",
+    "message_pitch": "Leave A-maze-ing",
+    "message_prompt": "None",
+    "children": [
+      "main",
+      "good-bye"
+    ],
+    "parameters": {}
+  },
+  "create_maze": {
+    "level": "create_maze",
+    "actionable": "True",
+    "message_pitch": "Create a Maze",
+    "message_prompt": "None",
+    "children": [
+      "main",
+      "quitting"
+    ],
+    "parameters": {
+      "Select Maze Width(2-50 squares)": {},
+      "Select Maze Height(2-50 squares)": {},
+      "Select a Maze Generator Algorithm": {
+  "Aldous-Broder Algorithm": "mazelib.generate.AldousBroder.AldousBroder",
+  "Binary Tree Algorithm": "mazelib.generate.BinaryTree.BinaryTree",
+  "Cellular Automaton Algorithm": "mazelib.generate.CellularAutomaton.CellularAutomaton",
+  "Dungeon-Room Algorithm": "mazelib.generate.DungeonRooms.DungeonRooms",
+  "Eller's Algorithm": "mazelib.generate.Ellers.Ellers",
+  "Growing Tree Algorithm": "mazelib.generate.GrowingTree.GrowingTree",
+  "Hunt-and-Kill Algorithm": "mazelib.generate.HuntAndKill.HuntAndKill",
+  "Kruskal's Algorithm": "mazelib.generate.Kruskal.Kruskal",
+  "Prim's Algorithm": "mazelib.generate.Prims.Prims",
+  "Recursive Backtracking": "mazelib.generate.BacktrackingGenerator.BacktrackingGenerator",
+  "Recursive Division Algorithm": "mazelib.generate.Division.Division",
+  "Sidewinder Algorithm": "mazelib.generate.Sidewinder.Sidewinder",
+  "Wilson's Algorithm": "mazelib.generate.Wilsons.Wilsons"
+}
+    }
+  },
+  "solve_maze": {
+    "level": "solve_maze",
+    "actionable": "True",
+    "message_pitch": "Solve a Maze",
+    "message_prompt": "None",
+    "children": [
+      "main",
+      "quitting"
+    ],
+    "parameters": {}
+  },
+  "good-bye": {
+    "level": "good-bye",
+    "actionable": "False",
+    "message_pitch": "The application is closing now.\nThank you for playing building and solving mazes with us!\nSee you soon. :)",
+    "message_prompt": "None",
+    "children": [
+      "main",
+      "quitting"
+    ],
+    "parameters": {}
+  }
+}

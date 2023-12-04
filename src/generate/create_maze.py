@@ -4,6 +4,7 @@ from mazelib.solve.BacktrackingSolver import BacktrackingSolver
 
 from src.models.maze import Maze
 from src.generate.convert_api_maze import string_to_maze
+from menu.menu_functions import import_data
 
 
 def create_maze(select, dim_row, dim_col) -> Maze:
@@ -29,23 +30,25 @@ def switch_functions(select, dim_row, dim_col):
     :param dim_col: int
     :return: maze generator
     """
-    switch_dict = {
-        1: AldousBroder.AldousBroder,
-        2: BacktrackingGenerator.BacktrackingGenerator,
-        3: BinaryTree.BinaryTree,
-        4: CellularAutomaton.CellularAutomaton,
-        5: Division.Division,
-        6: DungeonRooms.DungeonRooms,
-        7: Ellers.Ellers,
-        8: GrowingTree.GrowingTree,
-        9: HuntAndKill.HuntAndKill,
-        10: Kruskal.Kruskal,
-        11: Prims.Prims,
-        12: Sidewinder.Sidewinder,
-        13: Wilsons.Wilsons,
-    }
-    function = switch_dict.get(select, BacktrackingGenerator.BacktrackingGenerator)
-    return function(dim_row, dim_col)
+    # switch_dict = {
+    #     1: AldousBroder.AldousBroder,
+    #     2: BacktrackingGenerator.BacktrackingGenerator,
+    #     3: BinaryTree.BinaryTree,
+    #     4: CellularAutomaton.CellularAutomaton,
+    #     5: Division.Division,
+    #     6: DungeonRooms.DungeonRooms,
+    #     7: Ellers.Ellers,
+    #     8: GrowingTree.GrowingTree,
+    #     9: HuntAndKill.HuntAndKill,
+    #     10: Kruskal.Kruskal,
+    #     11: Prims.Prims,
+    #     12: Sidewinder.Sidewinder,
+    #     13: Wilsons.Wilsons,
+    # }
+    # switch_dict = import_data("resources/text/algorithms.json")
+    # function = switch_dict.get(select)
+    # return function(dim_row, dim_col)
+    pass
 
 
 def create_api(select, dim_row, dim_col):
@@ -67,6 +70,7 @@ def create_api(select, dim_row, dim_col):
 
 
 if __name__ == "__main__":
-    from src.view.renderer import SVGRenderer
-    maze = create_maze(6, 10, 10)
-    SVGRenderer(30, 6).render(maze=maze).preview()
+#     from src.view.renderer import SVGRenderer
+#     maze = create_maze(6, 10, 10)
+#     SVGRenderer(30, 6).render(maze=maze).preview()
+    print(type(Wilsons.Wilsons))
