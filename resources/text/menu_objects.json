@@ -171,7 +171,7 @@
   "good_bye": {
     "level": "good_bye",
     "mixin": "GoodByeMixin",
-    "message_pitch": "The application is closing now.\nThank you for playing building and solving mazes with us!\nSee you soon. :)",
+    "message_pitch": "The application is closing now.\nThank you for playing, building, and solving, mazes with us!\nSee you soon. :)",
     "message_prompt": "None",
     "children": {
     },

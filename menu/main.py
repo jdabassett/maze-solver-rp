@@ -12,10 +12,11 @@ def main() -> None:
 
     while True:
         sleep(2)
-        level = level.action()
+        print("")
         if level.level == "good_bye":
             level.action()
             break
+        level = level.action()
 
 
 if __name__ == "__main__":

@@ -1,5 +1,5 @@
 import time
-import pathlib
+from pathlib import Path
 import json
 import argparse
 
@@ -27,16 +27,17 @@ def sleep(multiple):
 
 def import_data() -> Menu:
     """"""
-    cwd = pathlib.Path.cwd()
-    path_messages = cwd.joinpath("resources","text","menu_objects.json")
+    cwd = Path.cwd()
+    path_messages = cwd.joinpath("resources", "text", "menu_objects.json")
     with path_messages.open("r") as file:
         data = json.load(file)
         return_object = create_menu_objects(data)
     return return_object
 
+
 def create_menu_objects(dict_import: dict) -> Menu:
     dict_menu = {}
-    for key,value in dict_import.items():
+    for key, value in dict_import.items():
         if value.get("mixin") == "TransitMixin":
             menu_new = type("TransitMenu", (Menu, TransitMixin), {})
             dict_menu[key] = menu_new(**value)
@@ -68,7 +69,6 @@ def create_menu_objects(dict_import: dict) -> Menu:
     return dict_menu.get("intro")
 
 
-
 def solve_maze() -> None:
     maze = Maze.load(parse_path())
     solutions = solve_all(maze)
@@ -80,12 +80,11 @@ def solve_maze() -> None:
         print("No solution found")
 
 
-def parse_path() -> pathlib.Path:
+def parse_path() -> Path:
     parser = argparse.ArgumentParser()
-    parser.add_argument("path", type=pathlib.Path)
+    parser.add_argument("path", type=Path)
     return parser.parse_args().path
 
 
 # if __name__=="__main__":
 #     intro = load_intro()
-
