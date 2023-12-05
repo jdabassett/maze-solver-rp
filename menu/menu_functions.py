@@ -13,7 +13,9 @@ from menu.menu_classes import (
     CreateMazeMixin,
     LoadMazeMixin,
     SaveMazeMixin,
-    QuittingMixin)
+    QuittingMixin,
+    GoodByeMixin
+)
 
 sleep_in_seconds = 0.2
 
@@ -52,6 +54,9 @@ def create_menu_objects(dict_import: dict) -> Menu:
             dict_menu[key] = menu_new(**value)
         elif value.get("mixin") == "QuittingMixin":
             menu_new = type("QuittingMenu", (Menu, QuittingMixin), {})
+            dict_menu[key] = menu_new(**value)
+        elif value.get("mixin") == "GoodByeMixin":
+            menu_new = type("GoodByeMenu", (Menu, GoodByeMixin), {})
             dict_menu[key] = menu_new(**value)
 
     for menu in dict_menu.values():

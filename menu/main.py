@@ -13,11 +13,9 @@ def main() -> None:
     while True:
         sleep(2)
         level = level.action()
-        if level.level == "quitting":
-            level = next(level)
+        if level.level == "good_bye":
+            level.action()
             break
-    sleep(2)
-    console.print(level, style="bold magenta")
 
 
 if __name__ == "__main__":

@@ -39,12 +39,11 @@ class Menu:
         """"""
         return self.children.get(self.next_level, self)
 
-    def what_to_do_with_current_maze(self, level_next) -> None:
-        if self.maze is not None:
-            console.print("You have an maze on hand. Would you like to save it first?", style="bold green")
-            input_user = Prompt.ask("[1] Yes\n[2]No", choices=["1", "2"], show_choices=False)
-            if input_user == "1":
-                self.transfer_maze_and_or_solution(level_next, self.maze, self.solution)
+    def what_to_do_with_current_maze(self) -> str:
+        console.print("You have an maze on hand. Would you like to save it first?", style="bold green")
+        console.print("[1] Yes\n[2] No",style="white")
+        return Prompt.ask("Choose by number", choices=["1", "2"], show_choices=False)
+
 
     def transfer_maze_and_or_solution(self, level_next, maze: Maze | None = None, solution: Solution | None = None):
         level_next.maze = maze
@@ -54,7 +53,7 @@ class Menu:
     def status_update(self):
         level_str = self.level.replace("_"," ").title()
         maze_exists = "\n[√]maze" if self.maze is not None else ""
-        solution_exists = "\n[√]solution" if self.maze is not None else ""
+        solution_exists = "\n[√]solution" if self.solution is not None else ""
         console.print(f"\nLocation: {level_str}{maze_exists}{solution_exists}", style="green")
 
 
@@ -64,7 +63,9 @@ class CreateMazeMixin:
             self.status_update()
             # if a maze already exists
             if self.maze is not None:
-                self.what_to_do_with_current_maze("save_maze")
+                input_str = self.what_to_do_with_current_maze()
+                if input_str == "1":
+                    return self.transfer_maze_and_or_solution(self.children.get("save_maze"), self.maze, self.solution)
 
             # otherwise create a new maze
             level_module_str = self.value.get("module")
@@ -114,7 +115,10 @@ class LoadMazeMixin:
             self.status_update()
             # if maze already exists
             if self.maze is not None:
-                self.what_to_do_with_current_maze("save_maze")
+                input_str = self.what_to_do_with_current_maze()
+                if input_str == "1":
+                    return self.transfer_maze_and_or_solution(self.children.get("save_maze"), self.maze, self.solution)
+
 
             console.print(self.message_prompt, style="bold green")
             root_dir = Path.cwd()
@@ -131,10 +135,8 @@ class LoadMazeMixin:
             if str(input_path.name) == "Cancel":
                 console.print("Leaving Load Maze.", style="green")
                 return self.transfer_maze_and_or_solution(self.children.get(self.previous_level), self.maze, self.solution)
-            print(str(input_path))
-            maze = Maze.load(input_path) | self.maze
+            maze = Maze.load(input_path) or self.maze
             return self.transfer_maze_and_or_solution(self.children.get(self.previous_level), maze, self.solution)
-
         except Exception as error:
             console.print("Something went wrong, please look under the hood and try again.", style="red")
             console.print(f"{error}", style="red")
@@ -172,6 +174,24 @@ class TransitMixin:
 
 class QuittingMixin:
     def action(self):
-        # TODO: allow user to return, save current maze, or leave
         self.status_update()
-        return self.transfer_maze_and_or_solution(self.children.get(self.previous_level), self.maze, self.solution)
+        if self.maze is not None:
+            input_str = self.what_to_do_with_current_maze()
+            if input_str == "1":
+                return self.transfer_maze_and_or_solution(self.children.get("save_maze"), self.maze, self.solution)
+        input_dict = {}
+        options = []
+        index = 1
+        for key, value in self.parameters.items():
+            options.append(str(index))
+            input_dict[str(index)] = value.get("value")
+            console.print(f"[{index}] {key}", style="white")
+            index+=1
+        input_str = Prompt.ask("Choose by number", choices=options, show_choices=False)
+        input_level = input_dict[input_str]
+        return self.transfer_maze_and_or_solution(self.children.get(input_level), self.maze, self.solution)
+
+class GoodByeMixin:
+    def action(self):
+        console.print(self, style="bold magenta")
+        return self

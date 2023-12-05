@@ -51,7 +51,9 @@
       "module": "",
       "callable": ""
     },
-    "parameters": {}
+    "parameters": {
+      "Last chance to return to main": {"value": "main"},
+      "Ready to leave": {"value": "good_bye"}}
   },
   "create_maze": {
     "level": "create_maze",
@@ -168,11 +170,10 @@
   },
   "good_bye": {
     "level": "good_bye",
-    "mixin": "TransitMixin",
+    "mixin": "GoodByeMixin",
     "message_pitch": "The application is closing now.\nThank you for playing building and solving mazes with us!\nSee you soon. :)",
     "message_prompt": "None",
     "children": {
-      "main": ""
     },
     "previous_level": "main",
     "next_level": "",
@@ -192,8 +193,8 @@
       "create_maze": "",
       "quitting": ""
     },
-    "previous_level": "create_maze",
-    "next_level": "create_maze",
+    "previous_level": "main",
+    "next_level": "main",
     "value": {
       "module": "",
       "callable": ""
@@ -208,6 +209,7 @@
     "children": {
       "main": "",
       "create_maze": "",
+      "save_maze": "",
       "quitting": ""
     },
     "previous_level": "main",
