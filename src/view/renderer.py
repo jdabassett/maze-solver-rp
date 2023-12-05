@@ -206,34 +206,6 @@ class SVGRenderer:
             # will add offsets and return new point
         ).translate(x=self.offset + extra_offset, y=self.offset + extra_offset)
 
-
-# def arrow_marker() -> str:
-#     """
-#     Will return an arrow xml element to render over exit
-#     :return:
-#     """
-#     return tag(
-#         "defs",
-#         tag(
-#             "marker",
-#             tag(
-#                 "path",
-#                 d="M 0,0 L 10,5 L 0,10 2,5 z",
-#                 fill="red",
-#                 fill_opacity="50%",
-#             ),
-#             id="arrow",
-#             viewBox="0 0 20 20",
-#             refX="2",
-#             refY="5",
-#             markerUnits="strokeWidth",
-#             markerWidth="10",
-#             markerHeight="10",
-#             orient="auto",
-#         ),
-#     )
-
-
 def background() -> str:
     """
     Generate background to maze
@@ -294,13 +266,12 @@ def label(emoji: str, top_left: Point, offset: int) -> str:
 
 # run the following in shell to test functionality
 # from pathlib import Path
-# from src.maze_solver.models.border import Border
-# from src.maze_solver.models.maze import Maze
-# from src.maze_solver.models.role import Role
-# from src.maze_solver.models.solution import Solution
-# from src.maze_solver.models.square import Square
-# from src.maze_solver.view.renderer import SVGRenderer
-#
+# from src.models.border import Border
+# from src.models.maze import Maze
+# from src.models.role import Role
+# from src.models.solution import Solution
+# from src.models.square import Square
+# #
 # maze = Maze(
 #     squares=(
 #         Square(0, 0, 0, Border.TOP | Border.LEFT),
@@ -320,6 +291,7 @@ def label(emoji: str, top_left: Point, offset: int) -> str:
 #
 # solution = Solution(squares=tuple(maze[i] for i in (8, 11, 7, 6, 2)))
 # svg = SVGRenderer().render(maze, solution)
+# svg.preview()
 #
 # with Path("maze.svg").open(mode="w", encoding="utf-8") as file:
 #     file.write(svg.xml_content)

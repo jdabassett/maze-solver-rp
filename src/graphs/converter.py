@@ -126,16 +126,16 @@ def get_nodes(maze: Maze) -> set[Node]:
         if square.role in (Role.EXTERIOR, Role.WALL):
             continue
         # add every square with a role other than None, Exterior, or Wall
-        if square.role is not Role.NONE:
-            nodes.add(square)
-        # add squares with intersection, dead-end, and corner borders
-        # remember sets cannot have duplicates, so it won't matter if it has already been added
-        if (
-            square.border.intersection
-            or square.border.dead_end
-            or square.border.corner
-        ):
-            nodes.add(square)
+        # if square.role is not Role.NONE:
+        #     nodes.add(square)
+        # # add squares with intersection, dead-end, and corner borders
+        # # remember sets cannot have duplicates, so it won't matter if it has already been added
+        # if (
+        #     square.border.intersection
+        #     or square.border.dead_end
+        #     or square.border.corner
+        # ):
+        nodes.add(square)
     # return set of nodes/squares
     return nodes
 
